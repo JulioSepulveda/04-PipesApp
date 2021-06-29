@@ -1,0 +1,102 @@
+<!-- text-layout es una clase personalizada que hemos creado en el styles.css -->
+<div class="text-layout">
+    <h1>Pipes no tan comunes</h1>
+    <p>
+        Pipes incluidos en Angular - Usualmente en el Common Module
+    </p>
+</div>
+
+<div class="p-grid">
+    <!-- con p-md-6 le estamos indicando el ancho de la columna. Cuando la pantalla sea tan pequeña que no se pueda dividir pasará 
+         a tomar de referencia p-col -->
+    <div class="p-col p_md-6">
+        <!-- fieldset es propio de PrimeNg, el cual lo hemos importado en el modulo prime-ng 
+             De primeras nos da error porque a parte de la documentación de primeNg tenemos que revisar la pestaña StackBlitz en la cual vemos que 
+             tenemos que importar en el app.module el BrowserAnimationsModule -->
+        <!--  La etiqueta toggleable es para que se comprima  el bloque -->
+        <p-fieldset legend="i18nSelect Pipe" [toggleable]="true">
+           
+            <p>
+                <!-- el pipe i18nSelect evalua el valor de una variable en función de un objeto de mapeo y muestra el resultado correspondiente 
+                 de dicho objeto -->
+                Saludos {{ nombre }}, es un placer {{ genero |i18nSelect: invitacionMapping }} a nuestro evento.
+            </p>
+
+            <button pButton (click)="cambiarNombre()"
+                            type="button" 
+                            label="Cambiar nombre" 
+                            class="p-button-outlined p-button-help" >
+            </button>
+
+        </p-fieldset>
+
+        <p-fieldset legend="i18nPlural Pipe" [toggleable]="true">
+
+            <p>
+                <!-- el pipe i18nPlurar realiza prácticamente lo mismo que el anterior pero tiene la opcion other para coger el valor de la variable 
+                utilizada. Por ejemplo en este caso coje el valor de clientes.length cuando hay mas de dos clientes -->
+                Actualmente {{ clientes.length | i18nPlural: clientesMapping }}
+            </p>
+
+            <button pButton (click)="eliminarCliente()"
+                            type="button" 
+                            label="Eliminar Cliente" 
+                            class="p-button-outlined p-button-danger">
+            </button>
+            
+        </p-fieldset>
+    </div>
+
+    <div class="p-col p_md-6">
+       
+        <!-- [toggleable] está en true para que se pueda comprimir dependiendo de la pantalla -->
+        <p-fieldset legend="Slice Pipe" [toggleable]="true">
+            <b>Original</b>
+            <pre>{{ clientes }}</pre>
+
+            <b>slice:0:2</b>
+            <!-- el pipe slice corta un objeto (string, array, etc) desde una pisición inicial hasta la final (esta no es obligatorio indicarla) 
+                 la diferencia es que en el anterior no se actualiza en pantalla los clientes que hay, sin embargo con el splice si-->
+            <pre>{{ clientes | slice:0:2 }}</pre>
+
+        </p-fieldset>   
+    </div>
+
+    <div class="p-col p_md-6">
+    
+        <!-- el pipe keyValue nos permite trabajar con objetos de pares de valores -->
+        <p-fieldset legend="KeyValue Pipe" [toggleable]="true">
+            <ul>
+                <li *ngFor="let item of persona | keyvalue">
+                    <b>{{ item.key | titlecase }}:</b> {{ item.value }}
+                </li>
+
+            </ul>
+
+        </p-fieldset>   
+    </div>
+
+    <div class="p-col p_md-6">
+    
+        <!-- el pipe json nos muestra un objeto como un json. Es muy util para el debug -->
+        <p-fieldset legend="Json Pipe" [toggleable]="true">
+            
+            <pre>{{ heroes | json }}</pre>
+
+        </p-fieldset>   
+    </div>
+
+    <div class="p-col p_md-6">
+    
+        <!-- el pipe async solo se puede utilizar con un Observable o una promise -->
+        <p-fieldset legend="Async Pipe" [toggleable]="true">
+        
+            <pre>{{ miObservable | async }}</pre>
+            <pre *ngIf="!(valorPromesa | async)">Resolviendo promesa</pre>
+            <pre>{{ valorPromesa | async }}</pre>
+
+
+        </p-fieldset>   
+    </div>
+
+</div>

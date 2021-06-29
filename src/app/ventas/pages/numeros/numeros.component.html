@@ -1,0 +1,46 @@
+<!-- text-layout es una clase personalizada que hemos creado en el styles.css -->
+<div class="text-layout">
+    <h1>Decimal Pipe y Porcentaje</h1>
+    <p>
+        Pipes incluidos en Angular - Usualmente en el Common Module
+    </p>
+</div>
+
+<div class="p-grid">
+    <div class="p-col-4">
+        <p-card header="Ventas Netas"
+                subheader="del presente año">
+                <!-- la etiqueta i es para escribir iconos. En este caso el del dolar -->
+            <i class="pi pi-dollar"></i>
+            <!-- en el pipe number el  1 es que quiero toda la parte decimal. Despues del punto indicamos los decimales, 2-2 significa que quiero 
+                dos decimales y si no hay tantos que se rellene con ceros. Si hay de más redondea a 2 -->
+            {{ ventasNetas + 1000000 | number:'1.2-2' }}
+        </p-card>
+    </div>
+
+    <div class="p-col-4">
+        <p-card header="Ventas Brutas"
+                subheader="del presente año">
+            <ul>
+                <!-- con el pipe currency popr defecto sale USD pero se puede incluir la divisa que quieres que se especifique -->
+                <li>{{ ventasNetas + 2000000 | currency:'EUR' }}</li>
+                <!-- también se le puede decir que en vez de EUR muestre el signo -->
+                <li>{{ ventasNetas + 2000000 | currency:'EUR':'symbol-narrow' }}</li>
+                <!-- por último también se le puede incluir el formato que quieres que salga -->
+                <li>{{ ventasNetas + 2000000 | currency:'EUR':'symbol-narrow':'1.4-4' }}</li>
+            </ul>
+            
+        </p-card>
+    </div>
+
+    <div class="p-col-4">
+        <p-card header="Ganancia Porcentual"
+                subheader="del presente año">
+            <ul>
+                <!-- con el pipe percent también se le puede incluir el formato que quieres que tenga -->
+                <li>{{ porcentaje | percent:'2.2-2'}}</li>
+            </ul>
+            
+        </p-card>
+    </div>
+</div>

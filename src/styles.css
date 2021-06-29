@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+    margin: 10px;
+    /* para background-color estamos utilizando una variable del archivo theme importado de PrimeNG */
+    background-color: var( --surface-b );
+    /* para font-family estamos utilizando una variable del archivo theme importado de PrimeNG */
+    font-family: var(--font-family);
+
+}
+
+/* No metemos el color del texto dentro del anterior bloque porque solo queremos que se modifique el color en determinados texto que lo indicamos en el 
+   componente llamando a este método */
+.text-layout {
+    color: var( --text-color );
+}
