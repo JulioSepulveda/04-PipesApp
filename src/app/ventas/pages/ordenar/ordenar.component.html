@@ -1,1 +1,96 @@
-<p>ordenar works!</p>
+<!-- text-layout es una clase personalizada que hemos creado en el styles.css -->
+<div class="text-layout">
+    <h1>Pipes personalizados</h1>
+    <!-- El false se recoge como un segundo parámetro -->
+    <p>Pipes creados por {{ 'nosotros' | mayusculas:toggleMayusculas }}</p>
+    
+</div>
+
+<!-- Para montar el toolbar seguir la documentación de primeNG  -->
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        
+    </div>
+    
+    <div class="p-toolbar-group-right">
+
+        <button pButton 
+                (click)="toggle()" 
+                label="Toggle Mayúsculas" 
+                class="p-mr-1 p-button-warning">
+        </button>
+
+        <button pButton
+                (click)="cambiarOrden('nombre')"
+                icon="pi pi-sort"
+                label="Por nombre"
+                class="p-mr-1">
+        </button>
+
+        <button pButton
+                (click)="cambiarOrden('vuela')"
+                icon="pi pi-sort"
+                label="Vuela"
+                class="p-mr-1 p-button-success">
+        </button>
+
+        <button pButton
+                (click)="cambiarOrden('color')"
+                icon="pi pi-sort"
+                label="Por Color"
+                class="p-mr-1 p-button-help">
+        </button>
+    </div>
+</p-toolbar>
+
+<!-- Para montar la tabla seguir las indicaciones de primeNg. En este caso es una tabla básica -->
+<div class="p-grid">
+    <div class="p-col p-mt-2">
+
+        <p-table [value]="heroes | ordenar:ordenarPor">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Vuela</th>
+                    <th>Color</th>
+                </tr>
+            </ng-template>
+            <!-- el let-heroe es un nombre inventado para llamar despues a las propiedades. Lo importante es el heroes de la etiqueta de arriba -->
+            <ng-template pTemplate="body" let-heroe>
+                <tr>
+                    <td>{{ heroe.nombre }}</td>
+                    <td>{{ heroe.vuela | vuela | titlecase }}</td>
+                    <td>{{ heroe.color | colores }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+</div>
+
+
+<!-- Para montar la tabla seguir las indicaciones de primeNg. En este caso es una tabla sort -->
+<div class="p-grid">
+    <div class="p-col p-mt-2">
+
+        <p-table [value]="heroes">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+                    <th pSortableColumn="vuela">Vuela <p-sortIcon field="vuela"></p-sortIcon></th>
+                    <th pSortableColumn="color">Color <p-sortIcon field="color"></p-sortIcon></th>
+                </tr>
+            </ng-template>
+            <!-- el let-heroe es un nombre inventado para llamar despues a las propiedades. Lo importante es el heroes de la etiqueta de arriba -->
+            <ng-template pTemplate="body" let-heroe>
+                <tr>
+                    <td>{{ heroe.nombre }}</td>
+                    <td>{{ heroe.vuela | vuela | titlecase }}</td>
+                    <td>{{ heroe.color | colores }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+</div>
+
